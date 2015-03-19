@@ -6,7 +6,7 @@ The experiments have been video-recorded to label the data manually.
 The original obtained dataset has been randomly partitioned into two sets, where 70% of the volunteers was selected for generating the training data and 30% the test data. 
 
 
-Files in folder ‘UCI HAR Dataset’ that were used in this project:
+Files in folder â€˜UCI HAR Datasetâ€™ that were used in this project:
 
 	SUBJECT FILES
 		test/subject_test.txt
@@ -30,7 +30,7 @@ Description of abbreviations of measurements
 	Jerk = sudden movement acceleration
 	Mag = magnitude of movement
 	mean and SD are calculated for each subject for each activity for each mean and SD measurements.
-	The units given are g’s for the accelerometer and rad/sec for the gyro and g/sec and rad/sec/sec for the corresponding jerks.
+	The units given are gâ€™s for the accelerometer and rad/sec for the gyro and g/sec and rad/sec/sec for the corresponding jerks.
 
 
 
@@ -46,7 +46,7 @@ During processing of these two dataset the following actions were taken:
 
 Below are the code with explanation on what was done:
 
-1. Read and merge activity Observations (X.. files), activity(Y.. files)  and Column labels(features.txt)
+Read and merge activity Observations (X.. files), activity(Y.. files)  and Column labels(features.txt)
 
 	# set current working directory
 	setwd("C:/R/CleanDataProject/UCIHARDataset")
@@ -75,13 +75,13 @@ Below are the code with explanation on what was done:
 	# combine observation data and activity code into a single frame
 	XY<-cbind(Y,X)
 
-2. Select only columns that contain mean and standard deviation values
+Select only columns that contain mean and standard deviation values
 
 	# select only columns with  mean and std values + Activity Code by using grep
 	SubXY<-XY[,grep("ActivityCode|std|mean",names(XY))]
 
 
-3. Read and merge Subject data 
+Read and merge Subject data 
 
 	# read subject data for test and train
 	subjTest<-read.table("test/subject_test.txt")
@@ -95,7 +95,7 @@ Below are the code with explanation on what was done:
 	# combine observation and activity code into a single frame
 	DataWithSubjects<-cbind(Subjects,SubXY)
 
-4. Add Activiy Labels based on Activity codes that are in data 
+Add Activiy Labels based on Activity codes that are in data 
 
 	# read activity labels so we can join it to observation data and have activity label spelled out
 	AL<-read.table("activity_labels.txt")
@@ -107,11 +107,11 @@ Below are the code with explanation on what was done:
 	names(mergedDataActivityLabels)[1]<-"Activitycode"
 	names(mergedDataActivityLabels)[2]<-"ActivityLabel"
 
-5. Calculate mean values for obervations in the data , grouped by Subject and ActivityLabel
+Calculate mean values for obervations in the data , grouped by Subject and ActivityLabel
 
 	AGR<-aggregate(mergedDataActivityLabels[, 4:82], list(mergedDataActivityLabels$Subjects,mergedDataActivityLabels$ActivityLabel), mean)
 
-6. correct the names for the data frame adding - avg at the end of each observation label.
+correct the names for the data frame adding - avg at the end of each observation label.
 
 	ModNames<-as.list('')
 	for (i in 3:81){
@@ -123,7 +123,7 @@ Below are the code with explanation on what was done:
 
 	names(AGR)<-ModNames
 
-7. Write date out
+Write date out
 	write.table(AGR,"AveragesBySubjectsAndActivity.txt")
 
 
@@ -131,84 +131,84 @@ Below are the code with explanation on what was done:
 
 New datasets contains columns shown below.
 
- 1   Subjects 
- 2   ActivityLabel 
- 3   tBodyAcc-mean()-X-avg 
- 4   tBodyAcc-mean()-Y-avg 
- 5   tBodyAcc-mean()-Z-avg 
- 6   tBodyAcc-std()-X-avg 
- 7   tBodyAcc-std()-Y-avg 
+ 1   Subjects	 
+ 2   ActivityLabel 	
+ 3   tBodyAcc-mean()-X-avg	 
+ 4   tBodyAcc-mean()-Y-avg 	
+ 5   tBodyAcc-mean()-Z-avg	 
+ 6   tBodyAcc-std()-X-avg 	
+ 7   tBodyAcc-std()-Y-avg 	
  8   tBodyAcc-std()-Z-avg 
- 9   tGravityAcc-mean()-X-avg 
- 10   tGravityAcc-mean()-Y-avg 
- 11   tGravityAcc-mean()-Z-avg 
- 12   tGravityAcc-std()-X-avg 
- 13   tGravityAcc-std()-Y-avg 
- 14   tGravityAcc-std()-Z-avg 
- 15   tBodyAccJerk-mean()-X-avg 
- 16   tBodyAccJerk-mean()-Y-avg 
- 17   tBodyAccJerk-mean()-Z-avg 
- 18   tBodyAccJerk-std()-X-avg 
- 19   tBodyAccJerk-std()-Y-avg 
- 20   tBodyAccJerk-std()-Z-avg 
- 21   tBodyGyro-mean()-X-avg 
- 22   tBodyGyro-mean()-Y-avg 
- 23   tBodyGyro-mean()-Z-avg 
- 24   tBodyGyro-std()-X-avg 
- 25   tBodyGyro-std()-Y-avg 
- 26   tBodyGyro-std()-Z-avg 
- 27   tBodyGyroJerk-mean()-X-avg 
- 28   tBodyGyroJerk-mean()-Y-avg 
- 29   tBodyGyroJerk-mean()-Z-avg 
- 30   tBodyGyroJerk-std()-X-avg 
- 31   tBodyGyroJerk-std()-Y-avg 
- 32   tBodyGyroJerk-std()-Z-avg 
- 33   tBodyAccMag-mean()-avg 
- 34   tBodyAccMag-std()-avg 
- 35   tGravityAccMag-mean()-avg 
- 36   tGravityAccMag-std()-avg 
- 37   tBodyAccJerkMag-mean()-avg 
- 38   tBodyAccJerkMag-std()-avg 
- 39   tBodyGyroMag-mean()-avg 
- 40   tBodyGyroMag-std()-avg 
+ 9   tGravityAcc-mean()-X-avg 	 
+ 10   tGravityAcc-mean()-Y-avg  
+ 11   tGravityAcc-mean()-Z-avg  
+ 12   tGravityAcc-std()-X-avg  
+ 13   tGravityAcc-std()-Y-avg  
+ 14   tGravityAcc-std()-Z-avg 	
+ 15   tBodyAccJerk-mean()-X-avg 	
+ 16   tBodyAccJerk-mean()-Y-avg 	
+ 17   tBodyAccJerk-mean()-Z-avg 	
+ 18   tBodyAccJerk-std()-X-avg 	
+ 19   tBodyAccJerk-std()-Y-avg 	
+ 20   tBodyAccJerk-std()-Z-avg 	
+ 21   tBodyGyro-mean()-X-avg 	
+ 22   tBodyGyro-mean()-Y-avg 	
+ 23   tBodyGyro-mean()-Z-avg 	
+ 24   tBodyGyro-std()-X-avg 	
+ 25   tBodyGyro-std()-Y-avg 	
+ 26   tBodyGyro-std()-Z-avg 	
+ 27   tBodyGyroJerk-mean()-X-avg	 
+ 28   tBodyGyroJerk-mean()-Y-avg 	
+ 29   tBodyGyroJerk-mean()-Z-avg 	
+ 30   tBodyGyroJerk-std()-X-avg 	
+ 31   tBodyGyroJerk-std()-Y-avg 	
+ 32   tBodyGyroJerk-std()-Z-avg 	
+ 33   tBodyAccMag-mean()-avg 	
+ 34   tBodyAccMag-std()-avg 	
+ 35   tGravityAccMag-mean()-avg 	
+ 36   tGravityAccMag-std()-avg 	
+ 37   tBodyAccJerkMag-mean()-avg	 
+ 38   tBodyAccJerkMag-std()-avg 	
+ 39   tBodyGyroMag-mean()-avg 	
+ 40   tBodyGyroMag-std()-avg 	
  41   tBodyGyroJerkMag-mean()-avg 
- 42   tBodyGyroJerkMag-std()-avg 
- 43   fBodyAcc-mean()-X-avg 
- 44   fBodyAcc-mean()-Y-avg 
- 45   fBodyAcc-mean()-Z-avg 
- 46   fBodyAcc-std()-X-avg 
- 47   fBodyAcc-std()-Y-avg 
- 48   fBodyAcc-std()-Z-avg 
- 49   fBodyAcc-meanFreq()-X-avg 
- 50   fBodyAcc-meanFreq()-Y-avg 
- 51   fBodyAcc-meanFreq()-Z-avg 
- 52   fBodyAccJerk-mean()-X-avg 
- 53   fBodyAccJerk-mean()-Y-avg 
- 54   fBodyAccJerk-mean()-Z-avg 
- 55   fBodyAccJerk-std()-X-avg 
- 56   fBodyAccJerk-std()-Y-avg 
- 57   fBodyAccJerk-std()-Z-avg 
- 58   fBodyAccJerk-meanFreq()-X-avg 
- 59   fBodyAccJerk-meanFreq()-Y-avg 
- 60   fBodyAccJerk-meanFreq()-Z-avg 
- 61   fBodyGyro-mean()-X-avg 
- 62   fBodyGyro-mean()-Y-avg 
- 63   fBodyGyro-mean()-Z-avg 
- 64   fBodyGyro-std()-X-avg 
- 65   fBodyGyro-std()-Y-avg 
- 66   fBodyGyro-std()-Z-avg 
- 67   fBodyGyro-meanFreq()-X-avg 
- 68   fBodyGyro-meanFreq()-Y-avg 
- 69   fBodyGyro-meanFreq()-Z-avg 
- 70   fBodyAccMag-mean()-avg 
- 71   fBodyAccMag-std()-avg 
- 72   fBodyAccMag-meanFreq()-avg 
- 73   fBodyBodyAccJerkMag-mean()-avg 
- 74   fBodyBodyAccJerkMag-std()-avg 
- 75   fBodyBodyAccJerkMag-meanFreq()-avg 
- 76   fBodyBodyGyroMag-mean()-avg 
- 77   fBodyBodyGyroMag-std()-avg 
- 78   fBodyBodyGyroMag-meanFreq()-avg 
- 79   fBodyBodyGyroJerkMag-mean()-avg 
- 80   fBodyBodyGyroJerkMag-std()-avg 
+ 42   tBodyGyroJerkMag-std()-avg 	
+ 43   fBodyAcc-mean()-X-avg 	
+ 44   fBodyAcc-mean()-Y-avg 	
+ 45   fBodyAcc-mean()-Z-avg 	
+ 46   fBodyAcc-std()-X-avg 	
+ 47   fBodyAcc-std()-Y-avg 	
+ 48   fBodyAcc-std()-Z-avg 	
+ 49   fBodyAcc-meanFreq()-X-avg 	
+ 50   fBodyAcc-meanFreq()-Y-avg 	
+ 51   fBodyAcc-meanFreq()-Z-avg 	
+ 52   fBodyAccJerk-mean()-X-avg 	
+ 53   fBodyAccJerk-mean()-Y-avg 	
+ 54   fBodyAccJerk-mean()-Z-avg 	
+ 55   fBodyAccJerk-std()-X-avg 	
+ 56   fBodyAccJerk-std()-Y-avg 	
+ 57   fBodyAccJerk-std()-Z-avg 	
+ 58   fBodyAccJerk-meanFreq()-X-avg     
+ 59   fBodyAccJerk-meanFreq()-Y-avg 	
+ 60   fBodyAccJerk-meanFreq()-Z-avg 	
+ 61   fBodyGyro-mean()-X-avg 	
+ 62   fBodyGyro-mean()-Y-avg 	
+ 63   fBodyGyro-mean()-Z-avg 	
+ 64   fBodyGyro-std()-X-avg 	
+ 65   fBodyGyro-std()-Y-avg 	
+ 66   fBodyGyro-std()-Z-avg 	
+ 67   fBodyGyro-meanFreq()-X-avg	 
+ 68   fBodyGyro-meanFreq()-Y-avg 	
+ 69   fBodyGyro-meanFreq()-Z-avg 	
+ 70   fBodyAccMag-mean()-avg 	
+ 71   fBodyAccMag-std()-avg 	
+ 72   fBodyAccMag-meanFreq()-avg	 
+ 73   fBodyBodyAccJerkMag-mean()-avg 	
+ 74   fBodyBodyAccJerkMag-std()-avg 	
+ 75   fBodyBodyAccJerkMag-meanFreq()-avg	 
+ 76   fBodyBodyGyroMag-mean()-avg 	
+ 77   fBodyBodyGyroMag-std()-avg 	
+ 78   fBodyBodyGyroMag-meanFreq()-avg 	
+ 79   fBodyBodyGyroJerkMag-mean()-avg 	
+ 80   fBodyBodyGyroJerkMag-std()-avg 	
  81   fBodyBodyGyroJerkMag-meanFreq()-avg 
